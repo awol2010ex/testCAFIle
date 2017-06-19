@@ -1,0 +1,5 @@
+rootProject.name = 'investment'
+
+include 'investment-file-encryption'
+include 'investment-web'
+

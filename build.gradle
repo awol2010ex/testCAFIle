@@ -1,0 +1,74 @@
+apply plugin: 'java'
+group 'com.towery.ghac'
+version '1.0'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+ext.SpringVersion = "1.5.4.RELEASE"
+buildscript {
+    repositories {
+        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
+        maven{
+            url 'http://repo.spring.io/libs-milestone/'
+        }
+
+        mavenCentral()
+        jcenter{
+            url 'http://jcenter.bintray.com/'
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE"
+
+    }
+}
+
+/** 此闭包内的声明子类皆可使用 */
+allprojects {
+    group = 'com.towery.ghac'
+    version = '1.0'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    repositories {
+        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
+        maven{
+            url 'http://repo.spring.io/libs-milestone/'
+        }
+        jcenter{
+            url 'http://jcenter.bintray.com/'
+        }
+        mavenCentral()
+
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    idea{
+        module{
+            inheritOutputDirs= false
+            outputDir= file("$buildDir/classes/main/")
+        }
+    }
+
+
+
+}
+
+
+subprojects{
+
+    dependencies {
+        compile "org.springframework.boot:spring-boot:$SpringVersion"
+        compile ("org.springframework.boot:spring-boot-starter-web:$SpringVersion"){
+            exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+        }
+
+        compile 'org.slf4j:slf4j-api:1.7.21'
+        testCompile("org.springframework.boot:spring-boot-starter-test:$SpringVersion")
+        testCompile 'junit:junit:4.12'
+        compile 'org.projectlombok:lombok:1.16.8'
+    }
+}

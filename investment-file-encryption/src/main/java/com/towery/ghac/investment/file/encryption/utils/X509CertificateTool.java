@@ -33,7 +33,7 @@ import java.util.Vector;
  * @version 1.00 Jun 29, 2009
  */
 public class X509CertificateTool {
-    private static final String DEFAULT_CA_ROOT_DN = "C=CN, L=四川, O=云涛软件工作室, OU=赵云涛";
+    private static final String DEFAULT_CA_ROOT_DN = "DC=guangzhouhonda,DC=com,DC=cn";
     private static Provider provider = new BouncyCastleProvider();
 
     static {
@@ -65,7 +65,7 @@ public class X509CertificateTool {
         tool.writeKeyToPemFile((Key) keyPair.getPrivate(), new File("E:/ca-root/jk_smcg/jk_smcg-private.pem"));
         tool.writeKeyToPemFile((Key) keyPair.getPublic(), new File("E:/ca-root/jk_smcg/jk_smcg-public.pem"));
         SimpleSubjectDN subject = new SimpleSubjectDN();
-        subject.username = "JK_SMCG";
+        subject.username = "GHAC";
         X509Certificate jkSmcgCert = new X509CertificateTool().generateClientCertificate(keyPair.getPublic(),
                 (PrivateKey) tool.readKeyFromPemFile(new File("E:/ca-root/ca-private.pem")), subject);
         new X509CertificateTool().writeCertificateToPemFile(jkSmcgCert, new File("E:/ca-root/jk_smcg/jk_smcg.cer"));
@@ -218,9 +218,9 @@ public class X509CertificateTool {
 
     public static class SimpleSubjectDN {
         public String country = "CN";
-        public String location = "四川";
-        public String company = "云涛软件工作室";
-        public String username = "赵云涛";
-        public String email = "zyuntao@126.com";
+        public String location = "广州";
+        public String company = "广汽本田汽车有限公司";
+        public String username = "GHAC";
+        public String email = "ghacit@ghac.cn";
     }
 }

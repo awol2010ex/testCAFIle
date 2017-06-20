@@ -1,9 +1,10 @@
 package com.towery.ghac.investment.file.encryption.utils;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * <p>Title: 简单快速加解密的工具,使用XXTEA算法(基于对称密钥)</p>
@@ -14,13 +15,13 @@ import java.io.IOException;
  * @since 2011-4-4
  */
 public class XXTEAUtil {
-    private static BASE64Encoder encoder = new BASE64Encoder();
-    private static BASE64Decoder decoder = new BASE64Decoder();
+    //private static BASE64Encoder encoder = new BASE64Encoder();
+    //private static BASE64Decoder decoder = new BASE64Decoder();
 
     public static String encrypt(String str, byte[] key) {
         String enVid = "";
         byte[] v = str.getBytes();
-        enVid = new String(encoder.encodeBuffer(encrypt(v, key)));
+        enVid = new String(Base64.encodeBase64(encrypt(v, key)));
         enVid = enVid.replace('+', '-');
         enVid = enVid.replace('/', '_');
         enVid = enVid.replace('=', '.');
@@ -33,8 +34,8 @@ public class XXTEAUtil {
         str = str.replace('.', '=');
         byte[] v;
         try {
-            v = decoder.decodeBuffer(str);
-        } catch (IOException e) {
+            v = Base64.decodeBase64(str);
+        } catch (Exception e) {
             throw new IllegalStateException("进行xxtea解密时发生错误", e);
         }
         return new String(decrypt(v, key));

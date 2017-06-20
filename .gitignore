@@ -11,5 +11,7 @@ node_modules
 **/*.iml
 **/*.ipr
 **/*.iws
+*.jks
+*.cer
 
 

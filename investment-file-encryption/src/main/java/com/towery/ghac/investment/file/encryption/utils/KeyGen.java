@@ -1,7 +1,9 @@
 package com.towery.ghac.investment.file.encryption.utils;
+
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by User on 2017/6/19.
  */

@@ -1,11 +1,12 @@
 package com.towery.ghac.investment.file.encryption.utils;
+
 /**
- * <p>Title: </p> 
+ * <p>Title: </p>
  * <p>Description: </p>
- * @version 1.00 
- * @since 2011-3-17
+ *
  * @author zhaoyuntao
- * 
+ * @version 1.00
+ * @since 2011-3-17
  */
 public class ByteArrayUtil {
     public static final int BYTE_MASK = 0xff;
@@ -14,7 +15,8 @@ public class ByteArrayUtil {
      * 把一个字节数组转为16进制字符串表示,一个字节表示为两个字符
      * 主要用于编码或者加密表示
      * eg: byte[] bs={15,17}
-     *     byteArray2HexString(bs)的结果是 0ff1
+     * byteArray2HexString(bs)的结果是 0ff1
+     *
      * @param data 字符数组
      * @return 16进制字符串
      */
@@ -31,6 +33,7 @@ public class ByteArrayUtil {
 
     /**
      * Base1编码
+     *
      * @param data
      * @return base16编码
      */
@@ -42,20 +45,22 @@ public class ByteArrayUtil {
      * @param base16
      * @return 将BASE16的字符串还原为字节数组
      */
-    public static byte[] base16decode(String base16Str){
-		byte[] ret = new byte[base16Str.length()/2];
-		int j = 0;
-		for(int i=0;i<base16Str.length();i+=2){
-			ret[j++] = (byte)(Integer.parseInt(""+base16Str.charAt(i)+base16Str.charAt(i+1),16));
-		}
-		return ret;
-	}
+    public static byte[] base16decode(String base16Str) {
+        byte[] ret = new byte[base16Str.length() / 2];
+        int j = 0;
+        for (int i = 0; i < base16Str.length(); i += 2) {
+            ret[j++] = (byte) (Integer.parseInt("" + base16Str.charAt(i) + base16Str.charAt(i + 1), 16));
+        }
+        return ret;
+    }
+
     /**
      * 字节数组转成一个int整数
      * 字节数组长度必须是4
      * 高字节在前的规则,也就是搞字节在低地址
-     * @param bs  长度为4的字节数组
-     * @return  整数
+     *
+     * @param bs 长度为4的字节数组
+     * @return 整数
      */
     public static int byteArray2Int(byte[] bs) {
         if (bs.length != 4)
@@ -70,7 +75,8 @@ public class ByteArrayUtil {
 
     /**
      * BigEndian：低地址存放最高有效位
-     * @param bs 
+     *
+     * @param bs
      * @return 整数
      */
     public static int byteArrayBigEndian2Int(byte[] bs) {
@@ -79,6 +85,7 @@ public class ByteArrayUtil {
 
     /**
      * 低地址存放最低有效位
+     *
      * @param bs
      * @return 整数
      */
@@ -96,6 +103,7 @@ public class ByteArrayUtil {
 
     /**
      * 整数转成字节数组
+     *
      * @param num
      * @return 字节数组
      * @see #byteArray2Int(byte[])
@@ -111,6 +119,7 @@ public class ByteArrayUtil {
 
     /**
      * 整数转成字节数组
+     *
      * @param num
      * @return 字节数组
      * @see #byteArrayBigEndian2Int(byte[])
@@ -121,6 +130,7 @@ public class ByteArrayUtil {
 
     /**
      * 整数转成字节数组
+     *
      * @param num
      * @return 字节数组
      * @see #byteArrayLittleEndian2Int(byte[])

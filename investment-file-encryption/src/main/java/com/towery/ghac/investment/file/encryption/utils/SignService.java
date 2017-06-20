@@ -1,6 +1,8 @@
 package com.towery.ghac.investment.file.encryption.utils;
+
 import java.security.PrivateKey;
 import java.security.Signature;
+
 /**
  * Created by User on 2017/6/19.
  */

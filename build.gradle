@@ -8,13 +8,13 @@ targetCompatibility = 1.8
 ext.SpringVersion = "1.5.4.RELEASE"
 buildscript {
     repositories {
-        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
-        maven{
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven {
             url 'http://repo.spring.io/libs-milestone/'
         }
 
         mavenCentral()
-        jcenter{
+        jcenter {
             url 'http://jcenter.bintray.com/'
         }
     }
@@ -24,7 +24,7 @@ buildscript {
     }
 }
 
-/** ´Ë±Õ°üÄÚµÄÉùÃ÷×ÓÀà½Ô¿ÉÊ¹ÓÃ */
+/** ï¿½Ë±Õ°ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½Ê¹ï¿½ï¿½ */
 allprojects {
     group = 'com.towery.ghac'
     version = '1.0'
@@ -32,11 +32,11 @@ allprojects {
     apply plugin: 'idea'
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
     repositories {
-        maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
-        maven{
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven {
             url 'http://repo.spring.io/libs-milestone/'
         }
-        jcenter{
+        jcenter {
             url 'http://jcenter.bintray.com/'
         }
         mavenCentral()
@@ -46,23 +46,22 @@ allprojects {
         options.encoding = "UTF-8"
     }
 
-    idea{
-        module{
-            inheritOutputDirs= false
-            outputDir= file("$buildDir/classes/main/")
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
         }
     }
-
 
 
 }
 
 
-subprojects{
+subprojects {
 
     dependencies {
         compile "org.springframework.boot:spring-boot:$SpringVersion"
-        compile ("org.springframework.boot:spring-boot-starter-web:$SpringVersion"){
+        compile("org.springframework.boot:spring-boot-starter-web:$SpringVersion") {
             exclude module: 'org.springframework.boot:spring-boot-starter-logging'
         }
 

@@ -3,7 +3,10 @@ package com.towery.ghac.investment.file.encryption.utils;
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
-import java.security.*;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -105,7 +108,7 @@ public class CertificateCoder {
         PrivateKey privateKey = getPrivateKey(keyStorePath, pwd, alias);
         //对数据进行加密
 
-        Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm(),new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm(), new org.bouncycastle.jce.provider.BouncyCastleProvider());
         cipher.init(Cipher.ENCRYPT_MODE, privateKey);
         // 获得加密块大小，如：加密前数据为128个byte，而key_size=1024
         int blockSize = cipher.getBlockSize();
@@ -143,7 +146,7 @@ public class CertificateCoder {
     public static byte[] decryptByPrivateKey(byte[] data, String keyStorePath, String alias, String pwd) throws Exception {
 
         PrivateKey privateKey = getPrivateKey(keyStorePath, pwd, alias);
-        Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm(),new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm(), new org.bouncycastle.jce.provider.BouncyCastleProvider());
         cipher.init(cipher.DECRYPT_MODE, privateKey);
         int blockSize = cipher.getBlockSize();
         ByteArrayOutputStream bout = new ByteArrayOutputStream(64);
@@ -168,7 +171,7 @@ public class CertificateCoder {
         //获取公匙
         PublicKey publicKey = getPublicKeyByCertificate(cerPath);
         //    System.out.println(publicKey.getAlgorithm());
-        Cipher cipher = Cipher.getInstance(publicKey.getAlgorithm(),new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        Cipher cipher = Cipher.getInstance(publicKey.getAlgorithm(), new org.bouncycastle.jce.provider.BouncyCastleProvider());
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         // 获得加密块大小，如：加密前数据为128个byte，而key_size=1024
         int blockSize = cipher.getBlockSize();

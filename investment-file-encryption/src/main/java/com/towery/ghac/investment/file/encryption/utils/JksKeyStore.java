@@ -1,8 +1,6 @@
 package com.towery.ghac.investment.file.encryption.utils;
 
 import org.bouncycastle.asn1.x500.X500Name;
-import org.bouncycastle.asn1.x500.X500NameBuilder;
-import org.bouncycastle.asn1.x500.style.BCStyle;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,11 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.*;
-import java.security.cert.*;
 import java.security.cert.Certificate;
-import java.security.spec.RSAPublicKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.Arrays;
+import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Random;
@@ -23,9 +18,9 @@ import java.util.Random;
  * Created by User on 2017/6/19.
  */
 public class JksKeyStore {
-    private static KeyStore keyStore;
     public static File jks = new File("keys.jks");
     public static String pwd = "password";
+    private static KeyStore keyStore;
 
     static {
         try {

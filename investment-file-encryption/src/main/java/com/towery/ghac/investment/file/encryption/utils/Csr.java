@@ -1,34 +1,25 @@
 package com.towery.ghac.investment.file.encryption.utils;
+
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.ASN1Object;
-import org.bouncycastle.asn1.ASN1Sequence;
-import org.bouncycastle.asn1.DERNull;
-import org.bouncycastle.asn1.pkcs.CertificationRequest;
 import org.bouncycastle.asn1.pkcs.CertificationRequestInfo;
-import org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import org.bouncycastle.asn1.x500.X500Name;
-import org.bouncycastle.asn1.x500.X500NameBuilder;
-import org.bouncycastle.asn1.x500.X500NameStyle;
-import org.bouncycastle.asn1.x500.style.BCStyle;
-import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.X509Extension;
-import org.bouncycastle.cert.X509CertificateHolder;
-import org.bouncycastle.cert.X509v3CertificateBuilder;
 import org.bouncycastle.jce.PKCS10CertificationRequest;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.jce.provider.asymmetric.ec.KeyPairGenerator;
-import org.bouncycastle.operator.ContentSigner;
-
 
 import javax.security.auth.x500.X500Principal;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigInteger;
-import java.security.*;
-import java.security.cert.*;
+import java.security.KeyPair;
+import java.security.KeyStore;
 import java.security.cert.Certificate;
-import java.util.*;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by User on 2017/6/19.
  */
@@ -49,9 +40,9 @@ public class Csr {
         code += "\n-----END CERTIFICATE REQUEST-----\n";
         System.out.println(code);
 
-      //  FileOutputStream fos = new FileOutputStream(new File("111.csr"));
-       // fos.write(code.getBytes());
-       // fos.close();
+        //  FileOutputStream fos = new FileOutputStream(new File("111.csr"));
+        // fos.write(code.getBytes());
+        // fos.close();
         return csr;
     }
 
@@ -95,7 +86,7 @@ public class Csr {
         KeyPair rootKeyPair = JksKeyStore.getKeyPair("key1");
         X500Name rootSubject = X500NameGen.gen("sk", "dev", "localhost");
         String rootCsr = genCsr(rootKeyPair, rootSubject);
-        X509Certificate rootCert = genCert(rootSubject, rootKeyPair, rootCsr,"E:\\ca-root\\jk_smcg\\jk_smcg.cer", extensions);
+        X509Certificate rootCert = genCert(rootSubject, rootKeyPair, rootCsr, "E:\\ca-root\\jk_smcg\\jk_smcg.cer", extensions);
 
         //颁发二级证书
         //KeyPair secondKeyPair = JksKeyStore.getKeyPair("key2");

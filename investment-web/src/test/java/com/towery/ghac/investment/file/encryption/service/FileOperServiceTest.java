@@ -27,15 +27,17 @@ public class FileOperServiceTest {
         String basePath = "G:\\test";
         String FilePath = "G:\\test\\natapp_windows_amd64_2_1_6.zip";
         String EnFilePath = "G:\\test\\natapp_windows_amd64_2_1_6-en.zip";
-
+        String DeFilePath = "G:\\test\\natapp_windows_amd64_2_1_6-de.zip";
 
         if(new File(EnFilePath).exists()){
             new File(EnFilePath).delete();
         }
-
+        if(new File(DeFilePath).exists()){
+            new File(DeFilePath).delete();
+        }
         EncryptionInfo info = fileOperService.encryptFile(FilePath, EnFilePath, "testpassword", basePath);
 
-        String DeFilePath =fileOperService.decryptFile(EnFilePath,info,basePath);
+        fileOperService.decryptFile(EnFilePath,DeFilePath,info,basePath);
 
         Assert.assertEquals(FileUtils.getHash(FilePath, "SHA1"), FileUtils.getHash(DeFilePath, "SHA1"));
 

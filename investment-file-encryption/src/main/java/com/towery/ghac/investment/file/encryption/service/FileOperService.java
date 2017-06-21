@@ -88,7 +88,7 @@ public class FileOperService {
 
 
     //解密文件
-    public String  decryptFile(String enFilePath,EncryptionInfo encryptionInfo ,String basePath) throws Exception {
+    public String  decryptFile(String enFilePath,String DeFilePath ,EncryptionInfo encryptionInfo ,String basePath) throws Exception {
 
         //分解解密文件
         Map<String,Object> divideInfo = this.divide(enFilePath);
@@ -101,8 +101,6 @@ public class FileOperService {
         //对称密钥解密--用CA的私钥
         byte[] DeKey = CertificateCoder.decryptByPrivateKey(EnKey, encryptionInfo.getJksPath(), "root", encryptionInfo.getPassword());
 
-        //解密文件路径
-        String DeFilePath =basePath +"\\"+UUIDUtil.genUUID();
 
         //文件解密
         AESCoder.decryptFile(enFilePathTmp, DeFilePath, DeKey);

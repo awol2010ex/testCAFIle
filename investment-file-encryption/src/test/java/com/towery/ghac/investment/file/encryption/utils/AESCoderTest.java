@@ -10,7 +10,7 @@ import org.junit.Test;
 public class AESCoderTest {
 
     /*文件对称加密解密测试*/
-    @Test
+    //@Test
     public void testEncryptFileAndDecryptFile() throws Exception {
         String FilePath = "G:\\test\\natapp_windows_amd64_2_1_6.zip";
         String EnFilePath = "G:\\test\\natapp_windows_amd64_2_1_6-en.zip";

@@ -63,7 +63,21 @@ public class AESCoder {
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, K);
         crypt(fileIn, fileOut, cipher);
+        fileIn.close();
+        fileOut.close();
+    }
+    public static void encryptFile(String FilePath, String EnFilePath, byte[] key,byte[] enKey) throws Exception {
+        FileInputStream fileIn = new FileInputStream(FilePath);
+        FileOutputStream fileOut = new FileOutputStream(EnFilePath);
+        Key K = toKey(key);
+        Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, K);
+        crypt(fileIn, fileOut, cipher);
 
+
+        fileOut.write(enKey);
+        fileIn.close();
+        fileOut.close();
     }
 
     public static void encryptFile(String FilePath, String EnFilePath, String key) throws Exception {

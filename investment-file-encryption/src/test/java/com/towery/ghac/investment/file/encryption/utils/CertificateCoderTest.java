@@ -10,7 +10,7 @@ import org.junit.Test;
 public class CertificateCoderTest {
 
     /*二进制对称密钥key   使用CA证书 加密解密*/
-    @Test
+   // @Test
     public void testEncryptKeyAndDecryptKeyByCA() throws Exception {
 
         //颁发证书 ---start

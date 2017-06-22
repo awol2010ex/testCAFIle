@@ -104,6 +104,9 @@ public class FileOperService {
 
         //文件解密
         AESCoder.decryptFile(enFilePathTmp, DeFilePath, DeKey);
+
+        //删除临时文件
+       // new File(enFilePathTmp).delete();
         return DeFilePath;
 
     }

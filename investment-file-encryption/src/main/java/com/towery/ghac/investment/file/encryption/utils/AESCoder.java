@@ -90,7 +90,7 @@ public class AESCoder {
         Key K = toKey(key);
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, K);
-        crypt(fileIn, fileOut, cipher);
+        crypt(fileIn, fileOut, cipher,128);
 
     }
 
@@ -140,5 +140,33 @@ public class AESCoder {
             fcIn.close();
     }
 
-
+    public static void crypt(FileInputStream in, FileOutputStream out, Cipher cipher,long offset) throws IOException, GeneralSecurityException {
+        FileChannel fcIn = null;
+        MappedByteBuffer mbbfIn = null;
+        int blockSize = cipher.getBlockSize();
+        int outputSize = cipher.getOutputSize(blockSize);
+        byte[] inBytes = new byte[blockSize];
+        byte[] outBytes = new byte[outputSize];
+        int len = 0, outLenth;
+        fcIn = in.getChannel();
+        mbbfIn = fcIn.map(FileChannel.MapMode.READ_ONLY, 0, fcIn.size()-offset);
+        boolean more = true;
+        while (more) {
+            len = mbbfIn.limit() - mbbfIn.position();
+            if (len > blockSize) {
+                mbbfIn.get(inBytes, 0, blockSize);
+                outLenth = cipher.update(inBytes, 0, blockSize, outBytes);
+                out.write(outBytes, 0, outLenth);
+            } else {
+                more = false;
+            }
+        }
+        if (len > 0) {
+            mbbfIn.get(inBytes, 0, len);
+            outBytes = cipher.doFinal(inBytes, 0, len);
+        } else outBytes = cipher.doFinal();
+        out.write(outBytes);
+        if (fcIn != null)
+            fcIn.close();
+    }
 }

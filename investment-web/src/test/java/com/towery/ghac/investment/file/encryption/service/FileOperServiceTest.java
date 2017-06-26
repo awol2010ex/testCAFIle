@@ -28,9 +28,9 @@ public class FileOperServiceTest {
     @Test
     public void  testEncryptDecryptFile() throws Exception {
         String basePath = "G:\\test";
-        String FilePath = "G:\\test\\natapp_windows_amd64_2_1_6.zip";
-        String EnFilePath = "G:\\test\\natapp_windows_amd64_2_1_6-en.zip";
-        String DeFilePath = "G:\\test\\natapp_windows_amd64_2_1_6-de.zip";
+        String FilePath = "G:\\test\\sunny day.mp4";
+        String EnFilePath = "G:\\test\\sunny day-en.mp4";
+        String DeFilePath = "G:\\test\\sunny day-de.mp4";
 
         if(new File(EnFilePath).exists()){
             new File(EnFilePath).delete();
@@ -42,15 +42,15 @@ public class FileOperServiceTest {
         Date startDate =new Date();
         EncryptionInfo info = fileOperService.encryptFile(FilePath, EnFilePath, "testpassword", basePath);
         Date endDate =new Date();
-        long runtime =(endDate.getTime() -startDate.getTime())/1000l ;
-        log.info("加密文件耗时:"+runtime+"s");
+        long runtime =(endDate.getTime() -startDate.getTime()) ;
+        log.info("加密总文件耗时:"+runtime+"ms");
 
 
         startDate =new Date();
         fileOperService.decryptFile(EnFilePath,DeFilePath,info,basePath);
         endDate =new Date();
-        runtime =(endDate.getTime() -startDate.getTime())/1000l ;
-        log.info("解密文件耗时:"+runtime+"s");
+        runtime =(endDate.getTime() -startDate.getTime()) ;
+        log.info("解密文件总耗时:"+runtime+"ms");
 
         //删除测试临时文件
         new File(info.getCerPath()).delete();

@@ -24,6 +24,8 @@ dependencies {
     
 
     compile project(':investment-file-encryption')
+    compile project(':investment-shiro')
+
 
 }
 

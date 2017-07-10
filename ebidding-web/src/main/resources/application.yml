@@ -1,0 +1,50 @@
+server:
+    port: 19090
+    context-path: /ebidding
+    tomcat:
+         uri-encoding: UTF-8
+         max-threads: 150
+    ssl:
+         key-store: classpath:keystore/keystore.p12
+         key-store-password: 123456
+         keyStoreType: PKCS12
+         keyAlias: tomcat
+logging:
+    level:
+        com:
+             towery:
+                  ghac:
+                       investment: DEBUG
+spring:
+    application:
+        name: ebidding
+    profiles:
+        active: dev
+    datasource:
+        name: ebidding
+        url: jdbc:mysql://localhost:3306/ebidding
+        username: root
+        password: root
+        driverClassName: com.mysql.jdbc.Driver
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+        filters: stat,wall,log4j
+        maxPoolPreparedStatementPerConnectionSize: 20
+        useGlobalDataSourceStat: true
+        hikari:
+             maxLifetime: 1765000
+             maximumPoolSize: 15
+    mvc:
+        view:
+            prefix: /jsp/
+            suffix: .jsp

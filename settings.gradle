@@ -1,5 +1,5 @@
-rootProject.name = 'investment'
+rootProject.name = 'ebidding'
 
-include 'investment-file-encryption'
-include 'investment-web'
-include 'investment-shiro'
+include 'ebidding-file-encryption'
+include 'ebidding-web'
+include 'ebidding-shiro'
